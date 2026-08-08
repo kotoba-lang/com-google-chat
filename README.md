@@ -33,3 +33,28 @@ notification channel).
 clojure -M:test
 clojure -M:lint
 ```
+
+## Connector
+
+`google-chat.connector` is `google-chat.client` given a descriptor — one tool,
+`google_chat_post_message`, write-only. The scope decision above still holds:
+there is no read counterpart, and `connector.model/read-only` on this
+descriptor leaves nothing, which is the honest answer for a webhook.
+
+**The webhook URL is the credential.** It arrives from Google already carrying
+`key` and `token`, and there is no header to authenticate with. Modelling that
+as a bearer token would be wrong twice: an Authorization header Google ignores,
+and the URL — the actual secret — sitting in a descriptor a connector catalog
+can print. The connector plane grew a `:url-credential` profile for this:
+`request` returns `:connector.http/url-from-credential`, and `connector.invoke`
+fills the URL in from the host's token store. There is a test asserting the
+descriptor contains no `chat.googleapis.com` string at all.
+
+Threading asks for `messageReplyOption=REPLY_MESSAGE_FALLBACK_TO_NEW_THREAD`
+explicitly: without it Google Chat treats `threadKey` as a hint and silently
+starts a new thread when it does not recognise the key.
+
+```sh
+nbb --classpath "src:test:../connector/src" run-connector-tests.cljs   # 8 tests, 19 assertions
+nbb --classpath "src:../connector/src" emit-connector-edn.cljs
+```
