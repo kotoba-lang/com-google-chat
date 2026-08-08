@@ -1,5 +1,9 @@
 {:paths ["src"]
- :deps {}
+ ;; connector is needed only by google-chat.connector, which gives the webhook
+ ;; client a descriptor. google-chat.client itself stays dependency-free.
+ :deps {io.github.kotoba-lang/connector
+        {:git/url "https://github.com/kotoba-lang/connector"
+         :git/sha "10a30f6dcb71be24a93ae7e434d62423396b7c7c"}}
  :aliases
  {:test {:extra-paths ["test"]
          :extra-deps {io.github.cognitect-labs/test-runner
