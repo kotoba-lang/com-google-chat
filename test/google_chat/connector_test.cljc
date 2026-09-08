@@ -1,6 +1,6 @@
 (ns google-chat.connector-test
   (:require [clojure.edn :as edn]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             [clojure.test :refer [deftest is testing]]
             [connector.declare :as decl]
             [connector.invoke :as invoke]
