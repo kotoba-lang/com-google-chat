@@ -1,7 +1,7 @@
 # com-google-chat
 
 Portable `.cljc` Google Chat client: **send-only**, via an Incoming
-Webhook URL. No polling/reading counterpart -- see `src/google_chat/client.cljc`
+Webhook URL. No polling/reading counterpart -- see `src/google_chat/client.cljk`
 for why (Google Chat's inbound path needs a Workspace Marketplace app
 registration + Google-issued JWT verification, and its full REST send API
 needs service-account JWT *signing*; both are disproportionate for a
@@ -55,6 +55,6 @@ explicitly: without it Google Chat treats `threadKey` as a hint and silently
 starts a new thread when it does not recognise the key.
 
 ```sh
-nbb --classpath "src:test:../connector/src" run-connector-tests.cljs   # 8 tests, 19 assertions
-nbb --classpath "src:../connector/src" emit-connector-edn.cljs
+nbb --classpath "src:test:../connector/src" run-connector-tests.cljk   # 8 tests, 19 assertions
+nbb --classpath "src:../connector/src" emit-connector-edn.cljk
 ```
