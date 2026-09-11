@@ -30,8 +30,8 @@ notification channel).
 ## Testing
 
 ```bash
-clojure -M:test
-clojure -M:lint
+kbb -M:test
+kbb -M:lint
 ```
 
 ## Connector
@@ -55,6 +55,6 @@ explicitly: without it Google Chat treats `threadKey` as a hint and silently
 starts a new thread when it does not recognise the key.
 
 ```sh
-nbb --classpath "src:test:../connector/src" run-connector-tests.cljk   # 8 tests, 19 assertions
-nbb --classpath "src:../connector/src" emit-connector-edn.cljk
+kbb --backend sci --classpath "src:test:../connector/src" run-connector-tests.cljk   # 8 tests, 19 assertions
+kbb --backend sci --classpath "src:../connector/src" emit-connector-edn.cljk
 ```
