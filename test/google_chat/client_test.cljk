@@ -1,5 +1,5 @@
 (ns google-chat.client-test
-  (:require [clojure.test :refer [deftest testing is]]
+  (:require [kotoba.test :refer [deftest testing is]]
             [google-chat.client :as client]))
 
 (defn- fake-io [status body]
